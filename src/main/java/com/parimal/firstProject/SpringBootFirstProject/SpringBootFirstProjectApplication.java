@@ -2,6 +2,7 @@ package com.parimal.firstProject.SpringBootFirstProject;
 
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Apple;
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Banana;
+import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,21 +23,27 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 	@Autowired
 	Banana b2;
 
+	@Autowired
+	DBService dbService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootFirstProjectApplication.class, args);
 	}
 
 	@Override
 	public void run(String[] args){
-		a.eatApple();
-		b.eatBanana();
+//		a.eatApple();
+//		b.eatBanana();
+//
+//		// as by default, only one bean is created irrespective of no.of objects created of the same class
+//		// to create multiple beans of the same class, use the @Scope("prototype"), in the AppConfig class.
+//		b2.eatBanana();
+//		// cross-checking by printing the hashCodes of both b and b2.
+//		System.out.println("HashCode of b: " + b.hashCode());
+//		System.out.println("HashCode of b2: " + b2.hashCode());
 
-		// as by default, only one bean is created irrespective of no.of objects created of the same class
-		// to create multiple beans of the same class, use the @Scope("prototype"), in the AppConfig class.
-		b2.eatBanana();
-		// cross-checking by printing the hashCodes of both b and b2.
-		System.out.println("HashCode of b: " + b.hashCode());
-		System.out.println("HashCode of b2: " + b2.hashCode());
+		// loosely coupled system demo.
+		System.out.println("The fetched data is: " + dbService.getData());
 
 
 	}
