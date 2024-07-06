@@ -38,7 +38,6 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 		HashMap<Integer, Integer> hm = new HashMap<>();
 		hm.put(10, hm.get(1));
 
-		Set<Integer> keys = hm.keySet();
 //		a.eatApple();
 //		b.eatBanana();
 //
