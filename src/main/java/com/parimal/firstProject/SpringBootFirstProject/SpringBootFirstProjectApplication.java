@@ -10,6 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 import java.net.http.WebSocket;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class SpringBootFirstProjectApplication implements CommandLineRunner {
@@ -32,6 +35,10 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String[] args){
+		HashMap<Integer, Integer> hm = new HashMap<>();
+		hm.put(10, hm.get(1));
+
+		Set<Integer> keys = hm.keySet();
 //		a.eatApple();
 //		b.eatBanana();
 //
