@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="UberApplication" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.parimal.project.uber.UberAppApplication" />
+    <module name="uberApp" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
