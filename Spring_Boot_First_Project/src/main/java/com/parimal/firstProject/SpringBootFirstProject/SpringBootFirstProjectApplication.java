@@ -2,12 +2,13 @@ package com.parimal.firstProject.SpringBootFirstProject;
 
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Apple;
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Banana;
+import com.parimal.firstProject.SpringBootFirstProject.SpringBoot_MVC_And_RestAPIs.services.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 	@Autowired		// notifies spring boot app when we want to inject a bean, wherever it is required.
@@ -18,6 +19,8 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 	@Autowired
 	Banana b2;
+
+	private SampleService service;
 
 
 	public static void main(String[] args) {
@@ -93,6 +96,11 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 		 */
 
 
+		/*
+				Testing:
+					We use the JUnit framework for writing out tests.
+					And for better Assertions we use the AssertJ library.
+		 */
 
 
 
