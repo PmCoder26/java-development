@@ -102,6 +102,28 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 					And for better Assertions we use the AssertJ library.
 		 */
 
+		/*
+							Aspect Oriented Programming.
+
+				Aspect: A class that defines the cross-cutting concern. It contains advice and pointcuts.
+
+				Advice: The action taken by the aspect at a particular join point. Types of advice include:
+					Before advice: Executes before the join point.
+					After advice: Executes after the join point, regardless of whether the join point completes normally
+						or throws an exception.
+				After returning advice: Executes after the join point completes normally.
+
+				After throwing advice: Executes after the join point throws an exception.
+
+				Around advice: Surrounds the join point and can control the execution of the join point.
+
+				Join point: A point in the execution of the application where the advice can be applied.
+					Examples of join points include method calls, constructor calls, and field access.
+				Pointcut: A predicate that defines the set of join points that an advice should be applied to.
+				 	Pointcuts are typically expressed using AspectJ pointcut expressions.
+
+		 */
+
 
 
 
