@@ -2,10 +2,7 @@ package com.parimal.firstProject.SpringBootFirstProject.SpringBoot_MVC_And_RestA
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.aspectj.lang.JoinPoint;
 
@@ -84,5 +81,23 @@ public class LoggingAspect {
     public void aspectMethodUsingThePointCutMethod(){
         log.info("Calling from the method: myLoggingAspectPointCut()");
     }
+
+    // This is similar to @After, but it’s run only after a normal execution of the
+    // method. This can also be used to access the returning object.
+    @AfterReturning(value = "myLoggingAspectPointCut()", returning = "returnedObject")
+    public void afterReturningMethod(JoinPoint joinPoint, Object returnedObject){
+        log.info("afterReturning method called!");
+        log.info("JoinPoint : " + joinPoint.getSignature());
+        log.info("Returned Object: " + returnedObject);
+    }
+
+    // This is similar to @After, but it’s run only after an exception is thrown
+    // while executing the method.
+    @AfterReturning(value = "myLoggingAspectPointCut()")
+    public void afterThrowingMethod(JoinPoint joinPoint){
+        log.info("afterThrowing method called!");
+        log.info("JoinPoint : " + joinPoint.getSignature());
+    }
+
 
 }
