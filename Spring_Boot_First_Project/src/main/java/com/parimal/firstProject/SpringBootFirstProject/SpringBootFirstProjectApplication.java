@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
-@SpringBootApplication()
+@SpringBootApplication
 public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 	@Autowired		// notifies spring boot app when we want to inject a bean, wherever it is required.
@@ -124,6 +125,15 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 		 */
 
+
+		/*
+										Concept - Caching
+				Steps:
+					1. use @EnableCaching to enable caching in the spring boot application class(i.e. in this class)
+					2. starting implementing caching using several method level and other annotations.
+					3. Use the third party cache provider like Redis
+					3. To apply the caching using redis, make the DTOs implement the 'Serializable' class.
+		 */
 
 
 

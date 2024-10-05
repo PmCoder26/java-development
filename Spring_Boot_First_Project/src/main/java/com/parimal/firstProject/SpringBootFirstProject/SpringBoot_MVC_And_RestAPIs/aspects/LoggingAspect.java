@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.aspectj.lang.JoinPoint;
 
-@Aspect
+//@Aspect
 @Slf4j
 @Component
 public class LoggingAspect {

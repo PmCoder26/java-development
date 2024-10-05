@@ -6,3 +6,7 @@ spring:
           google:
             client-id: 326346833934-9dboseot1ntmeo8185poljkp8rd0134q.apps.googleusercontent.com
             client-secret: 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
+  data:
+    redis:
+      host: localhost
+      port: 6379

@@ -1,12 +1,5 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SpringBootApp" type="Application" factoryName="Application">
-    <envs>
-      <env name="DB_HOST_URL" value="mysql-1.chci866o2f2m.eu-north-1.rds.amazonaws.com" />
-      <env name="DB_NAME" value="shop2" />
-      <env name="DB_PASSWORD" value="password" />
-      <env name="DB_USERNAME" value="root" />
-      <env name="SPRING_PROFILES_ACTIVE" value="dev" />
-    </envs>
     <option name="MAIN_CLASS_NAME" value="com.parimal.firstProject.SpringBootFirstProject.SpringBootFirstProjectApplication" />
     <module name="SpringBootFirstProject" />
     <method v="2">
