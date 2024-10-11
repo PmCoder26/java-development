@@ -21,4 +21,22 @@ public class CachingEmployeeController {
         return employeeService.getEmployeeById(employeeId);
     }
 
+    @PutMapping(path = "updateEmployeeById/{employeeId}")
+    public Employee2DTO updateEmployeeById(
+            @PathVariable
+            Long employeeId,
+            @RequestBody
+            Employee2DTO employee2DTO
+    ){
+        return employeeService.updateEmployeeById(employeeId, employee2DTO);
+    }
+
+    @PutMapping(path = "deleteEmployeeById/{employeeId}")
+    public void deleteEmployeeById(
+            @PathVariable
+            Long employeeId
+    ){
+        employeeService.deleteEmployeeById(employeeId);
+    }
+
 }

@@ -8,5 +8,10 @@ spring:
             client-secret: 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
   data:
     redis:
-      host: localhost
-      port: 6379
+      # for local redis database.
+#      host: localhost
+#      port: 6379
+      # for cloud redis database.
+      host: redis-14832.c15.us-east-1-4.ec2.redns.redis-cloud.com
+      password: W5CINNuj4K3RyO1yCUvTpV08V5sOxf0S
+      port: 14832
