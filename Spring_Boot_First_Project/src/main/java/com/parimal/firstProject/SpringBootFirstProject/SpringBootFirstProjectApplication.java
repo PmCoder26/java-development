@@ -2,10 +2,12 @@ package com.parimal.firstProject.SpringBootFirstProject;
 
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Apple;
 import com.parimal.firstProject.SpringBootFirstProject.ClassesHub.Banana;
+import com.parimal.firstProject.SpringBootFirstProject.SpringBoot_MVC_And_RestAPIs.services.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 public class SpringBootFirstProjectApplication implements CommandLineRunner {
@@ -18,6 +20,8 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 
 	@Autowired
 	Banana b2;
+
+	private SampleService service;
 
 
 	public static void main(String[] args) {
@@ -93,7 +97,43 @@ public class SpringBootFirstProjectApplication implements CommandLineRunner {
 		 */
 
 
+		/*
+				Testing:
+					We use the JUnit framework for writing out tests.
+					And for better Assertions we use the AssertJ library.
+		 */
 
+		/*
+							Aspect Oriented Programming.
+
+				Aspect: A class that defines the cross-cutting concern. It contains advice and pointcuts.
+
+				Advice: The action taken by the aspect at a particular join point. Types of advice include:
+					Before advice: Executes before the join point.
+					After advice: Executes after the join point, regardless of whether the join point completes normally
+						or throws an exception.
+				After returning advice: Executes after the join point completes normally.
+
+				After throwing advice: Executes after the join point throws an exception.
+
+				Around advice: Surrounds the join point and can control the execution of the join point.
+
+				Join point: A point in the execution of the application where the advice can be applied.
+					Examples of join points include method calls, constructor calls, and field access.
+				Pointcut: A predicate that defines the set of join points that an advice should be applied to.
+				 	Pointcuts are typically expressed using AspectJ pointcut expressions.
+
+		 */
+
+
+		/*
+										Concept - Caching
+				Steps:
+					1. use @EnableCaching to enable caching in the spring boot application class(i.e. in this class)
+					2. starting implementing caching using several method level and other annotations.
+					3. Use the third party cache provider like Redis
+					3. To apply the caching using redis, make the DTOs implement the 'Serializable' class.
+		 */
 
 
 
