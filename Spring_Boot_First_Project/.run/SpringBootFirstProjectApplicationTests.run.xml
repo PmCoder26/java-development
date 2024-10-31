@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringBootFirstProjectApplicationTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="SpringBootFirstProject" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.parimal.firstProject.SpringBootFirstProject.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.parimal.firstProject.SpringBootFirstProject" />
+    <option name="MAIN_CLASS_NAME" value="com.parimal.firstProject.SpringBootFirstProject.SpringBootFirstProjectApplicationTests" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <envs>
+      <env name="DB_HOST_URL" value="localhost" />
+      <env name="DB_NAME" value="shop" />
+      <env name="DB_PASSWORD" value="password" />
+      <env name="DB_USERNAME" value="root" />
+      <env name="SPRING_PROFILES_ACTIVE" value="dev" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
