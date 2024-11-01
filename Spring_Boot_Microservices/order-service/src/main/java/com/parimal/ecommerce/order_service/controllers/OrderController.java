@@ -1,6 +1,7 @@
 package com.parimal.ecommerce.order_service.controllers;
 
 
+import com.parimal.ecommerce.order_service.dtos.MessageDTO;
 import com.parimal.ecommerce.order_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.order_service.services.OrderService;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,6 @@ public class OrderController {
 
     private final OrderService orderService;
 
-
     @GetMapping(path = "/getAllOrders")
     public List<OrderRequestDTO> getAllOrders(){
         return orderService.getAllOrders();
@@ -30,6 +30,11 @@ public class OrderController {
             Long orderId
     ){
         return orderService.getOrderById(orderId);
+    }
+
+    @GetMapping(path = "/helloOrders")
+    public MessageDTO helloOrders(){
+        return new MessageDTO("Hello from Order-Service");
     }
 
 }

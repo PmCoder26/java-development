@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="InventoryServiceApp" type="Application" factoryName="Application">
+  <configuration default="false" name="Inventory Service App" type="Application" factoryName="Application">
     <envs>
       <env name="DB_HOST_URL" value="localhost:5432" />
       <env name="DB_NAME" value="inventoryDB" />
