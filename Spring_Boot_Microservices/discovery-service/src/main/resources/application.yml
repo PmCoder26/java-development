@@ -1,3 +1,8 @@
+spring:
+  application:
+    name: discovery-service
+
+#   Eureka server configs. As this is itself a server, disabling the eureka clients' default configs.
 eureka:
   client:
     register-with-eureka: false

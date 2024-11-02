@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "/orders")
+@RequestMapping(path = "/core")
 public class OrderController {
 
     private final OrderService orderService;

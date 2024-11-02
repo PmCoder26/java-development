@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: inventory-service
   datasource:
     url: jdbc:postgresql://${DB_HOST_URL}/${DB_NAME}?useSSL=false
     username:
@@ -19,7 +21,10 @@ spring:
 
 server:
   servlet:
-    context-path: /api/v1
+#    Before using the API Gateway.
+#    context-path: /api/v1
+    #    After using the API Gateway.
+    context-path: /products
   port: 9010
 
 # Eureka client configs.

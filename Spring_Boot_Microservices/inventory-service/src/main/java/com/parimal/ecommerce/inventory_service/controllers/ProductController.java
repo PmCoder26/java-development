@@ -20,7 +20,7 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/products")
+@RequestMapping(path = "/core")
 @AllArgsConstructor
 @Slf4j
 public class ProductController {
@@ -48,9 +48,10 @@ public class ProductController {
         ServiceInstance orderService = discoveryClient.getInstances("order-service").getFirst();
         ApiResponse responseData = restClient
                 .get()
-                .uri(orderService.getUri() + "/api/v1/orders/helloOrders")
+                .uri(orderService.getUri() + "/orders/core/helloOrders")
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
+        log.info("Uri: {}", orderService.getUri().toString());
         return modelMapper.map(responseData.getData(), MessageDTO.class);
     }
 }
