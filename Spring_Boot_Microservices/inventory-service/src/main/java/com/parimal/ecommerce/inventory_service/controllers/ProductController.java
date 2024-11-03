@@ -1,8 +1,10 @@
 package com.parimal.ecommerce.inventory_service.controllers;
 
-
 import com.parimal.ecommerce.inventory_service.advices.ApiResponse;
+import com.parimal.ecommerce.inventory_service.clients.OrderFeignClient;
+import com.parimal.ecommerce.inventory_service.dtos.DataDTO;
 import com.parimal.ecommerce.inventory_service.dtos.MessageDTO;
+import com.parimal.ecommerce.inventory_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.inventory_service.dtos.ProductDTO;
 import com.parimal.ecommerce.inventory_service.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -11,12 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
-
 import java.util.List;
 
 @RestController
@@ -29,13 +27,14 @@ public class ProductController {
     private final DiscoveryClient discoveryClient;
     private final RestClient restClient;
     private final ModelMapper modelMapper;
+    private final OrderFeignClient orderFeignClient;
 
-    @GetMapping(path = "getAllProducts")
+    @GetMapping(path = "/getAllProducts")
     public List<ProductDTO> getAllProducts(){
         return productService.getAllInventory();
     }
 
-    @GetMapping(path = "getProductById/{productId}")
+    @GetMapping(path = "/getProductById/{productId}")
     public ProductDTO getProductById(
             @PathVariable
             Long productId
@@ -54,4 +53,20 @@ public class ProductController {
         log.info("Uri: {}", orderService.getUri().toString());
         return modelMapper.map(responseData.getData(), MessageDTO.class);
     }
+
+    @GetMapping(path = "/fetchOrdersFromFeignClient")
+    public MessageDTO fetchFromOrdersFeignClient(){
+        ApiResponse orderResponse = orderFeignClient.helloOrders();
+        return modelMapper.map(orderResponse.getData(), MessageDTO.class);
+    }
+
+    @PutMapping(path = "/reduce-stocks")
+    public DataDTO<Double> reduceStocks(
+            @RequestBody
+            OrderRequestDTO orderRequestDTO
+    ){
+        return productService.reduceStocks(orderRequestDTO);
+    }
+
+
 }

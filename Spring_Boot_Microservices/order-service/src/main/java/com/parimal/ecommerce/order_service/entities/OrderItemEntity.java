@@ -1,6 +1,4 @@
 package com.parimal.ecommerce.order_service.entities;
-
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +15,8 @@ public class OrderItemEntity {
 
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity order;
+
 }

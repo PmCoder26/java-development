@@ -19,7 +19,7 @@ spring:
           uri: lb://INVENTORY-SERVICE
           predicates:
             - Path=/api/v1/products/**
-            - Method=GET, POST
+#            - Method=GET, POST
           filters:
             - StripPrefix=2
 

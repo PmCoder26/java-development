@@ -69,6 +69,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<!--	OpenFeign dependency for communication between two or more microservices internally.	-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 	</dependencies>
 		<!--  		Dependency management for the Discovery Eureka client   	-->
 	<dependencyManagement>

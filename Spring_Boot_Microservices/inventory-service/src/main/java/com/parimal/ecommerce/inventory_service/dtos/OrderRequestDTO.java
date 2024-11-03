@@ -1,4 +1,4 @@
-package com.parimal.ecommerce.order_service.dtos;
+package com.parimal.ecommerce.inventory_service.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,6 @@ import java.util.List;
 public class OrderRequestDTO {
 
     private Long id;
-    private List<OrderItemRequestDTO> orderItems;
-    private Double totalPrice;
+    private List<OrderRequestItemDTO> orderItems;
 
 }

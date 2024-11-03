@@ -5,10 +5,7 @@ import com.parimal.ecommerce.order_service.dtos.MessageDTO;
 import com.parimal.ecommerce.order_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.order_service.services.OrderService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,14 @@ public class OrderController {
     @GetMapping(path = "/helloOrders")
     public MessageDTO helloOrders(){
         return new MessageDTO("Hello from Order-Service");
+    }
+
+    @PostMapping(path = "/create-order")
+    public OrderRequestDTO createOrder(
+            @RequestBody
+            OrderRequestDTO orderRequestDTO
+    ){
+        return orderService.createOrder(orderRequestDTO);
     }
 
 }

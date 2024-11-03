@@ -1,16 +1,25 @@
 package com.parimal.ecommerce.order_service.services;
 
 
+import com.parimal.ecommerce.order_service.advices.ApiResponse;
+import com.parimal.ecommerce.order_service.clients.InventoryFeignClient;
+import com.parimal.ecommerce.order_service.dtos.DataDTO;
+import com.parimal.ecommerce.order_service.dtos.OrderItemRequestDTO;
 import com.parimal.ecommerce.order_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.order_service.entities.OrderEntity;
+import com.parimal.ecommerce.order_service.entities.OrderItemEntity;
 import com.parimal.ecommerce.order_service.exceptions.ResourceNotFoundException;
 import com.parimal.ecommerce.order_service.repositories.OrderRepository;
+import com.parimal.ecommerce.order_service.utils.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +28,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
+    private final InventoryFeignClient inventoryFeignClient;
 
     public List<OrderRequestDTO> getAllOrders(){
         log.info("Fetching all orders");
@@ -32,6 +42,25 @@ public class OrderService {
         OrderEntity order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with orderId: " + orderId));
         return modelMapper.map(order, OrderRequestDTO.class);
+    }
+
+    @Transactional()
+    public OrderRequestDTO createOrder(OrderRequestDTO orderRequestDTO) {
+        try {
+            ApiResponse response = inventoryFeignClient.reduceStocks(orderRequestDTO);
+            OrderEntity order = modelMapper.map(orderRequestDTO, OrderEntity.class);
+            Double totalPrice = 0.0;
+            for(OrderItemEntity item : order.getOrderItems()){
+                item.setOrder(order);
+            }
+            order.setTotalPrice(totalPrice);
+            order.setOrderStatus(OrderStatus.ORDERED);
+            OrderEntity saved = orderRepository.save(order);
+            return modelMapper.map(saved, OrderRequestDTO.class);
+        } catch (Exception e){
+            log.error("Create order error {}", e.getLocalizedMessage());
+            throw new RuntimeException(e);
+        }
     }
 
 }
