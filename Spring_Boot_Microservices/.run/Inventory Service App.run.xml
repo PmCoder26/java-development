@@ -2,7 +2,7 @@
   <configuration default="false" name="Inventory Service App" type="Application" factoryName="Application">
     <envs>
       <env name="DB_HOST_URL" value="localhost:5432" />
-      <env name="DB_NAME" value="inventorydb" />
+      <env name="DB_NAME" value="inventoryDB" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="com.parimal.ecommerce.inventory_service.InventoryServiceApplication" />
     <module name="inventory-service" />

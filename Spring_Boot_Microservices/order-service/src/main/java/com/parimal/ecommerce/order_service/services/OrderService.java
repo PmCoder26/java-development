@@ -4,7 +4,6 @@ package com.parimal.ecommerce.order_service.services;
 import com.parimal.ecommerce.order_service.advices.ApiResponse;
 import com.parimal.ecommerce.order_service.clients.InventoryFeignClient;
 import com.parimal.ecommerce.order_service.dtos.DataDTO;
-import com.parimal.ecommerce.order_service.dtos.OrderItemRequestDTO;
 import com.parimal.ecommerce.order_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.order_service.entities.OrderEntity;
 import com.parimal.ecommerce.order_service.entities.OrderItemEntity;
@@ -17,9 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -47,9 +44,10 @@ public class OrderService {
     @Transactional()
     public OrderRequestDTO createOrder(OrderRequestDTO orderRequestDTO) {
         try {
-            ApiResponse response = inventoryFeignClient.reduceStocks(orderRequestDTO);
+            ApiResponse<DataDTO> response = inventoryFeignClient.reduceStocks(orderRequestDTO);
+            DataDTO<Double> dataDTO = modelMapper.map(response.getData(), DataDTO.class);
             OrderEntity order = modelMapper.map(orderRequestDTO, OrderEntity.class);
-            Double totalPrice = 0.0;
+            Double totalPrice = dataDTO.getData();
             for(OrderItemEntity item : order.getOrderItems()){
                 item.setOrder(order);
             }
