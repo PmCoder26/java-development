@@ -1,6 +1,7 @@
 package com.parimal.ecommerce.order_service.services;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parimal.ecommerce.order_service.advices.ApiResponse;
 import com.parimal.ecommerce.order_service.clients.InventoryFeignClient;
 import com.parimal.ecommerce.order_service.dtos.DataDTO;
@@ -25,6 +26,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
     private final InventoryFeignClient inventoryFeignClient;
 
     public List<OrderRequestDTO> getAllOrders(){
@@ -44,8 +46,8 @@ public class OrderService {
     @Transactional()
     public OrderRequestDTO createOrder(OrderRequestDTO orderRequestDTO) {
         try {
-            ApiResponse<DataDTO> response = inventoryFeignClient.reduceStocks(orderRequestDTO);
-            DataDTO<Double> dataDTO = modelMapper.map(response.getData(), DataDTO.class);
+            ApiResponse response = inventoryFeignClient.reduceStocks(orderRequestDTO);
+            DataDTO<Double> dataDTO = objectMapper.convertValue(response.getData(), DataDTO.class);
             OrderEntity order = modelMapper.map(orderRequestDTO, OrderEntity.class);
             Double totalPrice = dataDTO.getData();
             for(OrderItemEntity item : order.getOrderItems()){

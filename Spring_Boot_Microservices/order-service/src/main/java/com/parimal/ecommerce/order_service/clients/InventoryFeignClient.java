@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface InventoryFeignClient {
 
     @PutMapping(path = "/core/reduce-stocks")
-    ApiResponse<DataDTO> reduceStocks(@RequestBody OrderRequestDTO orderRequestDTO);
+    ApiResponse reduceStocks(@RequestBody OrderRequestDTO orderRequestDTO);
 
 }
