@@ -8,10 +8,10 @@ public class ApiResponse<T> {
 
     private T data;
     private ApiError error;
-    private LocalDateTime timeStamp;
+    private String timeStamp;
 
     public ApiResponse(){
-        this.timeStamp = LocalDateTime.now();
+        this.timeStamp = LocalDateTime.now().toString();
     }
     public ApiResponse(T data){
         this();

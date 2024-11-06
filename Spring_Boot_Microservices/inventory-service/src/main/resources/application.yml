@@ -33,6 +33,3 @@ eureka:
     service-url:
 #      registering the inventory service to the eureka server using the below address of eureka server.
       defaultZone: http://localhost:9000/eureka
-
-
-

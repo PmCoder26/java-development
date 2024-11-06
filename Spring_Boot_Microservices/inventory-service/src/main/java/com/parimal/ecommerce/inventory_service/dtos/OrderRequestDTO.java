@@ -13,5 +13,6 @@ public class OrderRequestDTO {
 
     private Long id;
     private List<OrderRequestItemDTO> orderItems;
+    private Double totalPrice;
 
 }
