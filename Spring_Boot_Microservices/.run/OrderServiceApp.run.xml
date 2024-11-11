@@ -2,7 +2,7 @@
   <configuration default="false" name="OrderServiceApp" type="Application" factoryName="Application">
     <envs>
       <env name="DB_HOST_URL" value="localhost:5432" />
-      <env name="DB_NAME" value="ordersdb" />
+      <env name="DB_NAME" value="ordersDB" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="com.parimal.ecommerce.order_service.OrderServiceApplication" />
     <module name="order-service" />
