@@ -13,7 +13,7 @@ import static reactor.core.publisher.Mono.fromRunnable;
 
 @Component
 @Slf4j
-public class GlobalLoggingFilter  implements GlobalFilter, Ordered {
+public class GlobalLoggingFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         log.info("Logging from Global Pre: {}", exchange.getRequest().getURI());
