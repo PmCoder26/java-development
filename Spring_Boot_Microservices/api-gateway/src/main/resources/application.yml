@@ -16,6 +16,9 @@ spring:
 #            StripPrefix=2 will strip the first two prefixes(api and v1) in this case. As the order-service don't know about them.
             - StripPrefix=2
             - name: LoggingOrdersFilter
+            - name: Authentication
+              args:
+                isEnabled: true
         - id: inventory-service
           uri: lb://INVENTORY-SERVICE
           predicates:
@@ -32,3 +35,6 @@ eureka:
 
 server:
   port: 8090
+
+jwt:
+  secretKey: n8ct7b349x;nytr8tv4y[r8x3rcyvw4or4yx348ry34crworvy34rt7540385m70358nc8bc7ntmxbcou;brupt834y589tx8nr47

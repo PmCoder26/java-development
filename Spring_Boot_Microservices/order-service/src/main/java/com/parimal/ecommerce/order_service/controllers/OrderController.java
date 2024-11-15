@@ -30,8 +30,11 @@ public class OrderController {
     }
 
     @GetMapping(path = "/helloOrders")
-    public MessageDTO helloOrders(){
-        return new MessageDTO("Hello from Order-Service");
+    public MessageDTO helloOrders(
+            @RequestHeader(value = "X-User-Id")
+            Long userId
+    ){
+        return new MessageDTO("Hello from Order-Service with user id: " + userId);
     }
 
     @PostMapping(path = "/create-order")
