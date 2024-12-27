@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: api-gateway
+#  API gateway configurations.
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+#          lb - load balancer.
+          uri: lb://ORDER-SERVICE
+#          predicates are the conditions, only route to this order-service if the below path the api request has.
+          predicates:
+            - Path=/api/v1/orders/**
+            - Method=GET, POST
+          filters:
+#            StripPrefix=2 will strip the first two prefixes(api and v1) in this case. As the order-service don't know about them.
+            - StripPrefix=2
+            - name: LoggingOrdersFilter
+            - name: Authentication
+              args:
+                isEnabled: true
+        - id: inventory-service
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/api/v1/products/**
+#            - Method=GET, POST
+          filters:
+            - StripPrefix=2
+
+# Eureka configs.
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+
+server:
+  port: 8090
+
+jwt:
+  secretKey: n8ct7b349x;nytr8tv4y[r8x3rcyvw4or4yx348ry34crworvy34rt7540385m70358nc8bc7ntmxbcou;brupt834y589tx8nr47
