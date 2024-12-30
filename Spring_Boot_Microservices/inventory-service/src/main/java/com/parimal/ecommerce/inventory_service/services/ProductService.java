@@ -1,20 +1,17 @@
 package com.parimal.ecommerce.inventory_service.services;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parimal.ecommerce.inventory_service.dtos.DataDTO;
 import com.parimal.ecommerce.inventory_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.inventory_service.dtos.OrderRequestItemDTO;
 import com.parimal.ecommerce.inventory_service.dtos.ProductDTO;
 import com.parimal.ecommerce.inventory_service.entities.ProductEntity;
-import com.parimal.ecommerce.inventory_service.exceptions.InsufficientResourcesException;
 import com.parimal.ecommerce.inventory_service.exceptions.ResourceNotFoundException;
 import com.parimal.ecommerce.inventory_service.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
