@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Config Server" type="Application" factoryName="Application">
+    <envs>
+      <env name="GITHUB_URI" value="https://github.com/PmCoder26/ecommerce-config-server" />
+      <env name="GITHUB_USERNAME" value="PmCoder26" />
+      <env name="GITHUB_PASSWORD" value="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" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.parimal.ecommerce.config_server.ConfigServerApplication" />
+    <module name="config-server" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

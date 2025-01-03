@@ -23,20 +23,20 @@ public class AuthenticationGatewayFilterFactory extends AbstractGatewayFilterFac
     @Override
     public GatewayFilter apply(ConfigClass configClass){
         return (exchange, chain) -> {
-            String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
-            log.info(authHeader);
-            if (authHeader == null) {
-                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//               Means that as the authentication header is null, there is not jwt token for authentication,
-//                so don't let the request further pass to other (filters after this filter) or (downstream services) .
-                return exchange.getResponse().setComplete();
-            }
-            String token = authHeader.split("Bearer ")[1];
-            Long userId = jwtService.getUserIdFromToken(token);
+//            String authHeader = exchange.getRequest().getHeaders().getFirst("Authorization");
+//            log.info(authHeader);
+//            if (authHeader == null) {
+//                exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+////               Means that as the authentication header is null, there is not jwt token for authentication,
+////                so don't let the request further pass to other (filters after this filter) or (downstream services) .
+//                return exchange.getResponse().setComplete();
+//            }
+//            String token = authHeader.split("Bearer ")[1];
+//            Long userId = jwtService.getUserIdFromToken(token);
             // now modifying the requests called mutating the request.
             exchange.getRequest()
                     .mutate()
-                    .header("X-User-Id", userId.toString())
+//                    .header("X-User-Id", userId.toString())
                     .build();
             return chain.filter(exchange);
         };

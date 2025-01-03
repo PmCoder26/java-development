@@ -4,6 +4,9 @@ package com.parimal.ecommerce.inventory_service.configs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import feign.Capability;
+import feign.micrometer.MicrometerCapability;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +28,11 @@ public class AppConfig {
     @Bean
     public ObjectMapper getObjectMapper(){
         return new ObjectMapper();
+    }
+
+    @Bean
+    public Capability getCapability(final MeterRegistry meterRegistry) {
+        return new MicrometerCapability(meterRegistry);
     }
 
 }
