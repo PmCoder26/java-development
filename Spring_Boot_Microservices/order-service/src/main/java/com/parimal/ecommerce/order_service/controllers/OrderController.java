@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public class OrderController {
 
     @Value(value = "${my.variable}")
     private String myVariable;
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
 
     @GetMapping(path = "/getAllOrders")
@@ -48,6 +51,19 @@ public class OrderController {
     @GetMapping(path = "/helloOrdersWithVariable")
     public MessageDTO helloOrders() {
         return new MessageDTO("Hello from order-service with my variable: " + myVariable);
+    }
+
+    @GetMapping(path = "/hello-orders-with-kafka-message")
+    public MessageDTO helloOrdersWithKafka() {
+//        kafkaTemplate.send("parimal-events", "Hello parimal event");
+        // if the topic is not created initially or not present then the kafka creates automatically.
+//        kafkaTemplate.send("new-topic-events", "Hello from new topic event");
+//        kafkaTemplate.send("my-new-topic", "Message from my-new-topic");
+        // now sending thousands of messages.
+        for(int x = 0; x < 1000; x++) {
+            kafkaTemplate.send("my-new-topic", "Message from my-new-topic with offset: " + x);
+        }
+        return new MessageDTO("Hello from orders with kafka");
     }
 
     @PostMapping(path = "/create-order")

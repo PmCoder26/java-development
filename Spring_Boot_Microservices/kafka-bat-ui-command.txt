@@ -1,0 +1,1 @@
+java -Dspring.config.additional-location=application-local.yml --add-opens java.rmi/javax.rmi.ssl=ALL-UNNAMED -jar kafbat-ui-v1.0.0.jar
