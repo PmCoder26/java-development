@@ -6,6 +6,7 @@ import com.parimal.ecommerce.order_service.dtos.OrderRequestDTO;
 import com.parimal.ecommerce.order_service.services.OrderService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(path = "/core")
 @RefreshScope
+@Slf4j
 public class OrderController {
 
     private final OrderService orderService;
@@ -50,6 +52,7 @@ public class OrderController {
 
     @GetMapping(path = "/helloOrdersWithVariable")
     public MessageDTO helloOrders() {
+        log.info("Inside the helloOrders");
         return new MessageDTO("Hello from order-service with my variable: " + myVariable);
     }
 
