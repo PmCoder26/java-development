@@ -1,5 +1,6 @@
 package com.parimal.ecommerce.inventory_service.consumers;
 
+import com.parimal.ecommerce.order_service.events.OrderItemAddedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -30,6 +31,11 @@ public class OrdersKafkaConsumer {
     // and inject in the below method.
     public void handleOrderTopic3(String message) {
         log.info("Message received from my-new-topic to listener-3: {}", message);
+    }
+
+    @KafkaListener(topics = {"order-item-added-topic"})
+    public void handleOrderItemAddedTopic(OrderItemAddedEvent itemAddedEvent) {
+        log.info("Inside the order item added topic consumer with data: {}", itemAddedEvent);
     }
 
 }
