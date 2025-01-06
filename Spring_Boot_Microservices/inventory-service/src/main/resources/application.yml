@@ -40,5 +40,3 @@ spring:
     name: inventory-service
   config:
     import: configserver:http://localhost:9040
-
-
