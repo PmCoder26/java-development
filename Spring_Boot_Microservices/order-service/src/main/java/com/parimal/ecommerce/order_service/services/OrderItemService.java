@@ -1,10 +1,11 @@
 package com.parimal.ecommerce.order_service.services;
 
+import com.parimal.ecommerce.event.OrderItemAddedEvent;
 import com.parimal.ecommerce.order_service.dtos.OrderItemRequestDTO;
 import com.parimal.ecommerce.order_service.dtos.OrderItemResponseDTO;
 import com.parimal.ecommerce.order_service.entities.OrderItemEntity;
-import com.parimal.ecommerce.order_service.events.OrderItemAddedEvent;
-import com.parimal.ecommerce.order_service.repositories.OrderItemEntityRepository;
+//import com.parimal.ecommerce.order_service.events.OrderItemAddedEvent;    // before using kafka schema registry
+import com.parimal.ecommerce.order_service.repositories.OrderItemEntityRepository;  // for using kafka schema registry
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;

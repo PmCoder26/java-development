@@ -1,0 +1,19 @@
+{
+  "name": "OrderItemAddedEvent",
+  "namespace": "com.parimal.ecommerce.event",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "productId",
+      "type": "long"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 package com.parimal.ecommerce.inventory_service.consumers;
 
-import com.parimal.ecommerce.order_service.events.OrderItemAddedEvent;
+
+//import com.parimal.ecommerce.order_service.events.OrderItemAddedEvent;        // before using the schema registry.
+import com.parimal.ecommerce.event.OrderItemAddedEvent;                         // after using the schema registry.
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
