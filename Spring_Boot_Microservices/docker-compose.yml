@@ -1,6 +1,85 @@
----
-services:
+version: "3.9"
 
+services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin-container
+    ports:
+      - "9411:9411"
+    networks:
+      - ecommerce-network
+
+  orders-db:
+    image: postgres:latest
+    container_name: orders-db-container
+    environment:
+      - POSTGRES_DB=ordersdb
+      - POSTGRES_USER=parimal
+      - POSTGRES_PASSWORD=password
+    networks:
+      - ecommerce-network
+    volumes:
+      - orders-db-data:/var/lib/postgresql/data
+
+  inventory-db:
+    image: postgres:latest
+    container_name: inventory-db-container
+    environment:
+      - POSTGRES_DB=inventorydb
+      - POSTGRES_USER=parimal
+      - POSTGRES_PASSWORD=password
+    networks:
+      - ecommerce-network
+    volumes:
+      - inventory-db-data:/var/lib/postgresql/data
+
+  discovery-service:
+    image: parimalmatte/discovery-service
+    container_name: discovery-service-container
+    ports:
+      - "8761:8761"
+    networks:
+      - ecommerce-network
+
+  config-server:
+    image: parimalmatte/config-server
+    container_name: config-server-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - zipkin
+      - discovery-service
+
+  inventory-service:
+    image: parimalmatte/inventory-service
+    container_name: inventory-service-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - inventory-db
+      - config-server
+
+  order-service:
+    image: parimalmatte/order-service
+    container_name: order-service-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - orders-db
+      - config-server
+
+  api-gateway:
+    image: parimalmatte/api-gateway
+    container_name: api-gateway-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - order-service
+      - inventory-service
+    ports:
+      - "8090:8090"
+
+#        Kafka configs for docker compose.
   broker:
     image: confluentinc/cp-kafka:7.8.0
     hostname: broker
@@ -8,6 +87,8 @@ services:
     ports:
       - "9092:9092"
       - "9101:9101"
+    networks:
+      - ecommerce-network
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
@@ -36,6 +117,8 @@ services:
       - broker
     ports:
       - "8081:8081"
+    networks:
+      - ecommerce-network
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
@@ -50,6 +133,8 @@ services:
       - schema-registry
     ports:
       - "8083:8083"
+    networks:
+      - ecommerce-network
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
       CONNECT_REST_ADVERTISED_HOST_NAME: connect
@@ -81,6 +166,8 @@ services:
       - ksqldb-server
     ports:
       - "9021:9021"
+    networks:
+      - ecommerce-network
     environment:
       CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
       CONTROL_CENTER_CONNECT_CONNECT-DEFAULT_CLUSTER: 'connect:8083'
@@ -103,6 +190,8 @@ services:
       - connect
     ports:
       - "8088:8088"
+    networks:
+      - ecommerce-network
     environment:
       KSQL_CONFIG_DIR: "/etc/ksql"
       KSQL_BOOTSTRAP_SERVERS: "broker:29092"
@@ -116,3 +205,10 @@ services:
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
       KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: 'true'
       KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: 'true'
+
+volumes:
+  orders-db-data:
+  inventory-db-data:
+
+networks:
+  ecommerce-network:
