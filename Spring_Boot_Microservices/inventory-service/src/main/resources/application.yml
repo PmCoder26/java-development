@@ -39,4 +39,6 @@ spring:
   application:
     name: inventory-service
   config:
-    import: configserver:http://localhost:9040
+#    import: configserver:http://localhost:9040
+    #     for docker container
+    import: configserver:http://config-server:9040
