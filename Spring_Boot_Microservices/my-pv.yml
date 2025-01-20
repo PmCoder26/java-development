@@ -1,0 +1,16 @@
+#   pv -> persistent volume in the kubernetes.
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode:  Filesystem
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: /tmp/demo-pv
