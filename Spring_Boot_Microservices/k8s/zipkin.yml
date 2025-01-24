@@ -5,18 +5,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: zipkin
+      app: zipkin
   template:
     metadata:
       labels:
         app: zipkin
     spec:
       containers:
-        - name: zipkin
-          image: zipkin
+        - name: zipkin-container
+          image: openzipkin/zipkin
           resources:
             limits:
-              memory: "128Mi"
+              memory: "400Mi"
               cpu: "500m"
           ports:
             - containerPort: 9411
@@ -25,7 +25,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: zipkin
+  name: zipkin-service
 spec:
   selector:
     app: zipkin

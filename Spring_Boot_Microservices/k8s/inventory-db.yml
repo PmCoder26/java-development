@@ -46,8 +46,8 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
-        storageClassName: standard-rwo
+            storage: "1Gi"
+        storageClassName: standard
         volumeMode: Filesystem
 
 ---

@@ -88,4 +88,6 @@ spring:
   config:
 #    import: configserver:http://localhost:9040
     #     for docker container
-    import: configserver:http://config-server:9040
+#    import: configserver:http://config-server:9040
+    # for kubernetes.
+    import: configserver:http://config-server-service:9040
