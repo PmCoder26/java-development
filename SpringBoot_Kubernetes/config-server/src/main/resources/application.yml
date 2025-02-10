@@ -1,0 +1,21 @@
+spring:
+  application:
+  name: config-server
+
+  #   Config server configs.
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/PmCoder26/ecommerce-kubernetes-config
+          username: PmCoder26
+          password: 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
+          default-label: main
+
+server:
+  port: 9040
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

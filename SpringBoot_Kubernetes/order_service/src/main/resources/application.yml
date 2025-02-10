@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: configserver:http://localhost:9040
+    #     for docker container
+#    import: configserver:http://config-server:9040
