@@ -1,0 +1,87 @@
+# command to this run docker compose: docker compose -p spring_boot_kubernetes up
+
+services:
+  zipkin-service:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin-container
+    networks:
+      - ecommerce-network
+    ports:
+      - "9411:9411"
+
+  orders-db-service:
+    image: postgres:16
+    container_name: orders-db-container
+    networks:
+      - ecommerce-network
+    environment:
+      - POSTGRES_DB=ordersDB
+      - POSTGRES_USER=parimal
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - orders-db-data:/var/lib/postgres/data
+
+  inventory-db-service:
+    image: postgres:16
+    container_name: inventory-db-container
+    networks:
+      - ecommerce-network
+    environment:
+      - POSTGRES_DB=inventoryDB
+      - POSTGRES_USER=parimal
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - inventory-db-data:/var/lib/postgres/data
+
+  discovery-service:
+    image: parimalmatte/kubernetes-images:discovery-service-v0.0.1   # syntax for docker repository having multiple images.
+    container_name: discovery-service-container
+    networks:
+      - ecommerce-network
+    ports:
+      - "8761:8761"
+
+  config-server:
+    image: parimalmatte/kubernetes-images:config-server-v0.0.1
+    container_name: config-server-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - zipkin-service
+      - discovery-service
+
+  inventory-service:
+    image: parimalmatte/kubernetes-images:inventory-service-v0.0.1
+    container_name: inventory-service-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - inventory-db-service
+      - config-server
+
+  order-service:
+    image: parimalmatte/kubernetes-images:order-service-v0.0.1
+    container_name: order-service-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - orders-db-service
+      - config-server
+
+  api-gateway:
+    image: parimalmatte/kubernetes-images:api-gateway-v0.0.1
+    container_name: api-gateway-container
+    networks:
+      - ecommerce-network
+    depends_on:
+      - order-service
+      - inventory-service
+    ports:
+      - "8090:8090"
+
+networks:
+  ecommerce-network:
+
+volumes:
+  orders-db-data:
+  inventory-db-data:

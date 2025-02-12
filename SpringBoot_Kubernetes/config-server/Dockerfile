@@ -8,4 +8,5 @@ COPY pom.xml mvnw ./
 
 RUN ./mvnw dependency:go-offline
 
-CMD ["./mvnw", "spring-boot:run"]
+#   executes after 30s.
+CMD ["sh", "-c", "sleep 30 && ./mvnw spring-boot:run"]
