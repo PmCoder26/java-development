@@ -1,0 +1,19 @@
+{
+  "name": "SpringBoot-Microservices-DevContainer",
+  "dockerFile": "Dockerfile",
+  "remoteUser": "root",
+  "workspaceFolder": "/workspace",
+
+  "mounts": [
+    "source=spring_boot_volume,target=/workspace,type=volume"
+  ],
+
+  "containerEnv": {
+    "POSTGRES_DB": "microservices_db",
+    "POSTGRES_USER": "user",
+    "POSTGRES_PASSWORD": "password"
+  },
+
+  "postCreateCommand": "mvn -v"
+
+}
